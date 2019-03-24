@@ -1,16 +1,24 @@
 PATH
   remote: .
   specs:
-    basiq (0.1.0)
-      faraday (~> 0.9)
+    basiq-sdk (0.1.0)
+      faraday (>= 0.9.1)
+      multi_json (>= 1.11.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.6.0)
+      public_suffix (>= 2.0.2, < 4.0)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
     diff-lcs (1.3)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
+    hashdiff (0.3.8)
+    multi_json (1.13.1)
     multipart-post (2.0.0)
+    public_suffix (3.0.3)
     rake (10.5.0)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
@@ -25,15 +33,21 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
+    safe_yaml (1.0.5)
+    webmock (1.24.6)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  basiq!
+  basiq-sdk!
   bundler (~> 1.17)
   rake (~> 10.0)
   rspec (~> 3.0)
+  webmock (~> 1.24.0)
 
 BUNDLED WITH
    1.17.1
