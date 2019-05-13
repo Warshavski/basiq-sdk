@@ -6,13 +6,11 @@ RSpec.describe Basiq::ServiceError do
     context 'empty params' do
       subject { described_class.new }
 
-      it { expect(subject.message).to eq(' @title=nil, @detail=nil, @body=nil, @raw_body=nil, @status_code=nil') }
+      it { expect(subject.message).to eq(' @correlation_id=nil, @data=nil, @raw_body=nil, @status_code=nil') }
 
-      it { expect(subject.title).to be_nil }
+      it { expect(subject.correlation_id).to be_nil }
 
-      it { expect(subject.detail).to be_nil }
-
-      it { expect(subject.body).to be_nil }
+      it { expect(subject.data).to be_nil }
 
       it { expect(subject.raw_body).to be_nil }
 
@@ -22,13 +20,11 @@ RSpec.describe Basiq::ServiceError do
     context 'only message' do
       subject { described_class.new('test message') }
 
-      it { expect(subject.message).to eq('test message @title=nil, @detail=nil, @body=nil, @raw_body=nil, @status_code=nil') }
+      it { expect(subject.message).to eq('test message @correlation_id=nil, @data=nil, @raw_body=nil, @status_code=nil') }
 
-      it { expect(subject.title).to be_nil }
+      it { expect(subject.correlation_id).to be_nil }
 
-      it { expect(subject.detail).to be_nil }
-
-      it { expect(subject.body).to be_nil }
+      it { expect(subject.data).to be_nil }
 
       it { expect(subject.raw_body).to be_nil }
 
@@ -40,21 +36,18 @@ RSpec.describe Basiq::ServiceError do
 
       let(:params) do
         {
-          title: 'title',
-          detail: 'detail',
-          body: 'body',
+          correlation_id: 'correlation_id',
+          data: 'data',
           raw_body: 'raw_body',
           status_code: 'status_code'
         }
       end
 
-      it { expect(subject.message).to eq("test message @title=\"title\", @detail=\"detail\", @body=\"body\", @raw_body=\"raw_body\", @status_code=\"status_code\"") }
+      it { expect(subject.message).to eq("test message @correlation_id=\"correlation_id\", @data=\"data\", @raw_body=\"raw_body\", @status_code=\"status_code\"") }
 
-      it { expect(subject.title).to eq('title') }
+      it { expect(subject.correlation_id).to eq('correlation_id') }
 
-      it { expect(subject.detail).to eq('detail') }
-
-      it { expect(subject.body).to eq('body') }
+      it { expect(subject.data).to eq('data') }
 
       it { expect(subject.raw_body).to eq('raw_body') }
 
@@ -69,14 +62,13 @@ RSpec.describe Basiq::ServiceError do
 
     let(:params) do
       {
-        title: 'title',
-        detail: 'detail',
-        body: 'body',
+        correlation_id: 'correlation_id',
+        data: 'data',
         raw_body: 'raw_body',
         status_code: 'status_code'
       }
     end
 
-    it { expect(subject).to eq("test message @title=\"title\", @detail=\"detail\", @body=\"body\", @raw_body=\"raw_body\", @status_code=\"status_code\"") }
+    it { expect(subject).to eq("test message @correlation_id=\"correlation_id\", @data=\"data\", @raw_body=\"raw_body\", @status_code=\"status_code\"") }
   end
 end
