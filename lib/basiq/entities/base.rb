@@ -34,7 +34,13 @@ module Basiq
       end
 
       def stringify_keys(hash)
-        hash.transform_keys { |key| key.to_s }
+        transform_keys(hash) { |key| key.to_s }
+      end
+
+      def transform_keys(hash)
+        hash.each_with_object({}) do |(key, value), result|
+          result[yield(key)] = value
+        end
       end
 
       def _assign_attribute(attr_name, attr_value)

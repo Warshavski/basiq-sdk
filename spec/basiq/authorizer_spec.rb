@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Basiq::Authorizer do
-  let(:endpoint) { 'https://au-api.basiq.io/token' }
+  let(:endpoint) { "https://j%98%A4%7B@au-api.basiq.io/token" }
 
   before do
     stub_request(:post, endpoint).to_return(body: body, status: status)

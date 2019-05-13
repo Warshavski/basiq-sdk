@@ -99,17 +99,9 @@ module Basiq
           parsed_response = MultiJson.load(error.response[:body])
 
           if parsed_response
-            error_params[:body] = parsed_response
-
-            if parsed_response['title']
-              error_params[:title] = parsed_response['title']
-            end
-
-            if parsed_response['detail']
-              error_params[:detail] = parsed_response['detail']
-            end
+            error_params[:correlation_id] = parsed_response['correlationId']
+            error_params[:data] = parsed_response['data']
           end
-
         end
       rescue MultiJson::ParseError
       end
