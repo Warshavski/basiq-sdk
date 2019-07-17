@@ -1,6 +1,16 @@
 # Ruby basiq-sdk
 
-TODO : Add description
+Basiq SDK is a set of tools you can use to easily communicate with Basiq API.
+It incapsulates all API requests and data trasformation.
+The SDK is organized to mirror the HTTP API's functionality and hierarchy.
+The top level object needed for SDKs functionality is the `Basiq::Client` object which requires your API key to be instantiated.
+
+The API of the SDK is manipulated using `Basiq::Query` and `Basiq::Entities`.
+Different queries return different entities, but the mapping is not one to one.
+
+Some of the methods support adding filters to them.
+The filters are created using the `Basiq::Query` class.
+After instantiating the class, you can invoke methods in the form of comparison(field, value).
 
 Work in progress...
 
