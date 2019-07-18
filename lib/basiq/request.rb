@@ -3,12 +3,13 @@
 module Basiq
   # Basiq::Request
   #
-  #   [DESCRIPTION]
+  #   Used to make requests and parse response from BASIQ API
   #
   class Request
     TIMEOUT = 60
     OPEN_TIMEOUT = 60
     API_ENDPOINT = 'https://au-api.basiq.io'
+    API_VERSION = '2.0'
 
     def initialize(endpoint)
       @endpoint = endpoint
@@ -54,7 +55,7 @@ module Basiq
       request.params.merge!(params) if params
 
       request.headers['Content-Type'] = 'application/json'
-      request.headers['basiq-version'] = '2.0'
+      request.headers['basiq-version'] = API_VERSION
       request.headers.merge!(headers) if headers
 
       request.body = body if body
@@ -71,11 +72,10 @@ module Basiq
     end
 
     def parse_response(response)
-      return nil if response.body.nil? || response.body.empty?
+      return nil if empty_response?(response)
 
       begin
-        headers = response.headers
-        body = MultiJson.load(response.body, symbolize_keys: true)
+        headers, body = prepare_response(response)
 
         Response.new(headers: headers, body: body)
       rescue MultiJson::ParseError
@@ -88,27 +88,46 @@ module Basiq
       end
     end
 
+    def empty_response?(response)
+      response.body.nil? || response.body.empty?
+    end
+
+    def prepare_response(response)
+      headers = response.headers
+      body = MultiJson.load(response.body, symbolize_keys: true)
+
+      [headers, body]
+    end
+
     def handle_error(error)
-      error_params = {}
-
-      begin
-        if error.is_a?(Faraday::Error::ClientError) && error.response
-          error_params[:status_code] = error.response[:status]
-          error_params[:raw_body] = error.response[:body]
-
-          parsed_response = MultiJson.load(error.response[:body])
-
-          if parsed_response
-            error_params[:correlation_id] = parsed_response['correlationId']
-            error_params[:data] = parsed_response['data']
-          end
-        end
-      rescue MultiJson::ParseError
-      end
+      error_params = parsable_error?(error) ? parse_error(error) : {}
 
       error_to_raise = ServiceError.new(error.message, error_params)
 
       raise error_to_raise
+    end
+
+    def parsable_error?(error)
+      error.is_a?(Faraday::Error::ClientError) && error.response
+    end
+
+    def parse_error(error)
+      error_params = {
+        status_code: error.response[:status],
+        raw_body: error.response[:body]
+      }
+
+      begin
+        parsed_response = MultiJson.load(error.response[:body])
+
+        if parsed_response
+          error_params[:correlation_id] = parsed_response['correlationId']
+          error_params[:data] = parsed_response['data']
+        end
+      rescue MultiJson::ParseError
+      end
+
+      error_params
     end
   end
 end

@@ -4,7 +4,7 @@ module Basiq
   module Entities
     # Basiq::Entities::Base
     #
-    #   [DESCRIPTION]
+    #   Used to construct an entity(BASIQ object)
     #
     class Base
       # @param [Hash] attributes - (optional, nil) Attributes in hash
