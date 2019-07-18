@@ -38,7 +38,7 @@ module Basiq
       # @return [Boolean]
       #
       def valid?
-        (Time.now - @current_session_ts).to_i < expires_in
+        (Time.now.utc - @current_session_ts).to_i < expires_in
       end
     end
   end

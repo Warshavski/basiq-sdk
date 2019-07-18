@@ -6,8 +6,10 @@ module Basiq
     #
     #   The connection object is created whenever a user links their
     #   financial institution with your app.
+    #
     #   Once a connection is successfully created - you can use it to obtain the
     #   user's latest financial data i.e. accounts and transactions.
+    #
     #   After a connection is successfully established, you can fetch
     #   data created after this point by refreshing the connection.
     #   This process ensures on-demand data syncronization between your system

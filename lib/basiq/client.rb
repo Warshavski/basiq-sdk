@@ -12,6 +12,8 @@ module Basiq
     def initialize(api_key)
       @api_key = api_key
       @access_token = nil
+
+      yield(self) if block_given?
     end
 
     # Check client authorization
@@ -30,11 +32,15 @@ module Basiq
 
     # Get accounts query to perform operations related to the accounts endpoint
     #
+    # @param [String] user_id - A string that uniquely identifies the user
+    #
     def accounts(user_id)
       build_query("users/#{user_id}/accounts")
     end
 
     # Get connections query to perform operations related to the connections endpoint
+    #
+    # @param [String] user_id - A string that uniquely identifies the user
     #
     def connections(user_id)
       endpoint = "users/#{user_id}/connections"
@@ -43,6 +49,8 @@ module Basiq
     end
 
     # Get transaction query to perform operations related to the transaction endpoint
+    #
+    # @param [String] user_id - A string that uniquely identifies the user
     #
     def transactions(user_id)
       build_query("users/#{user_id}/transactions")
