@@ -52,4 +52,15 @@ build-iPhoneSimulator/
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
 
+# IDE files
 .idea
+
+# rspec failure tracking
+.rspec_status
+
+# For those using rbenv
+.ruby-version
+
+# Don't checkin Gemfile.lock
+# See: http://yehudakatz.com/2010/12/16/clarifying-the-roles-of-the-gemspec-and-gemfile/
+Gemfile.lock
