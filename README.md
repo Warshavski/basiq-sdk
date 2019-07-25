@@ -1,18 +1,18 @@
 # Ruby basiq-sdk
 
-Basiq SDK is a set of tools you can use to easily communicate with Basiq API.
-It incapsulates all API requests and data trasformation.
-The SDK is organized to mirror the HTTP API's functionality and hierarchy.
-The top level object needed for SDKs functionality is the `Basiq::Client` object which requires your API key to be instantiated.
+[![Build Status](https://travis-ci.com/Warshavski/basiq-sdk.svg?branch=develop)](https://travis-ci.com/Warshavski/basiq-sdk)
 
-The API of the SDK is manipulated using `Basiq::Query` and `Basiq::Entities`.
-Different queries return different entities, but the mapping is not one to one.
+Ruby SDK for interacting with [BASIQ REST API](https://api.basiq.io/reference).
 
-Some of the methods support adding filters to them.
-The filters are created using the `Basiq::Query` class.
-After instantiating the class, you can invoke methods in the form of comparison(field, value).
+Basiq provides a collection of APIs to help you build powerful financial solutions for a wide range of use cases.
 
-Work in progress...
+## Introduction
+
+Before you can start using any of the available Basiq APIs there are a few things you will need to do first.
+
+ - [Sign-up](https://dashboard.basiq.io/login) to the Basiq API service
+ - Grab your API key for your application (via the [Developer Dashboard](https://dashboard.basiq.io/))
+ - Once you have successfully obtained an API key, you can start using any of the available Basiq APIs.
 
 ## Installation
 
@@ -32,7 +32,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Basiq SDK is a set of tools you can use to easily communicate with Basiq API.
+It encapsulates all API requests and data transformation.
+The SDK is organized to mirror the HTTP API's functionality and hierarchy.
+The top level object needed for SDKs functionality is the `Basiq::Client` object which requires your API key to be instantiated.
+
+The API of the SDK is manipulated using `Basiq::Query` and `Basiq::Entities`.
+Different queries return different entities, but the mapping is not one to one.
+
+Some of the methods support adding filters to them.
+The filters are created using the `Basiq::Query` class.
+After instantiating the class, you can invoke methods in the form of comparison(field, value).
 
 ## Development
 
@@ -42,7 +52,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/basiq-sdk. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/warshavski/basiq-sdk. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
