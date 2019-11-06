@@ -1,13 +1,17 @@
----
 sudo: false
 language: ruby
-
 cache: bundler
-
 before_install: gem install bundler
-
 rvm:
-  - 2.6
-  - 2.5
-  - 2.4
-  - 2.3
+- 2.6
+- 2.5
+- 2.4
+- 2.3
+deploy:
+  provider: rubygems
+  api_key:
+    secure: domxWM28lEPrJxXWi70tHPHVtmqU3Ej3IIKjQ1PfckiZAAP0SmYFAYRaEdzfw4gp7yRHo01otG9BhonlCEXklbThJv9hy4TpdC7I1JkTxmMYDhrSNOWTWwG5pj8WdJP1M+Vs69HUhsWqfodIFhQSoFLrvPV1qiVl7WlTHnhbDXG2fvMZP7YVNBpUgUi/6W9dPKoHBi5LubyRFXy6OMaVzuKkKIbrSDLNkmVNhVG3bynJDMciAaXfbAxDIiak84MXB+s25S6VfdOiG0VzT/8LCFhGH97QbqoSM3ypIvnywPvRYTdXAMifDKBrClCIQ5CGQ+V6HE4CHxw9INYL9DBZSIX42yjsSU9W4ozePZSO75yYoGrlM3XmWS79E9NE3WC42heeu0NJWM7fNjyIwMgVfhdkTbjAO5+0AC1Aokh0wk8joE3PwDFOKS2dSfL6s7cXrEBaMewaPveo8BdDEcQ8mhNQfEbgcOsEou++tn2o9SYPApGlj9MbNpPT8vSciZNAb8BVigwn8IPmGt+idNGdvCfrciY1DAjlwA20TrSEAZXRvpqFPF4OkUE9EwDibbPIqaxmttWC4kWUfdDS2xmwNQ0fe28DtPGs0y9MiivCKB69JVvjTOrEIZugVvc1UShufg/rW3W78EmA+Y+XQ9ipEGTnGe/1wdgZJm/EQaFR3vY=
+  gem: basiq-sdk
+  on:
+    tags: true
+    repo: Warshavski/basiq-sdk
