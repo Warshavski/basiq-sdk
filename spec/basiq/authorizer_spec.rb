@@ -3,10 +3,14 @@
 require 'spec_helper'
 
 RSpec.describe Basiq::Authorizer do
-  let(:endpoint) { "https://j%98%A4%7B@au-api.basiq.io/token" }
+  let(:endpoints) do
+    %w[https://j%98%A4%7B@au-api.basiq.io/token https://au-api.basiq.io/token]
+  end
 
   before do
-    stub_request(:post, endpoint).to_return(body: body, status: status)
+    endpoints.each do |endpoint|
+      stub_request(:post, endpoint).to_return(body: body, status: status)
+    end
   end
 
   describe '#obtain_token' do

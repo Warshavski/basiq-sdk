@@ -43,11 +43,8 @@ module Basiq
     #
     def create(params)
       body = compose_body(params)
-      response = Basiq::Request
-                 .new(@root_endpoint)
-                 .post(body: body, headers: headers)
 
-      @parser.parse(response.body)
+      perform_request!(:post, endpoint: @root_endpoint, body: body)
     end
 
     # Updates the specified connection object by setting the values of the parameters passed.
@@ -82,11 +79,7 @@ module Basiq
       endpoint = "/#{@root_endpoint}/#{connection_id}"
       body = compose_body(params).without('institution')
 
-      response = Basiq::Request
-                 .new(endpoint)
-                 .post(body: body, headers: headers)
-
-      @parser.parse(response.body)
+      perform_request!(:post, endpoint: endpoint, body: body)
     end
 
     # Use this to retrieve the latest financial data.
@@ -113,9 +106,7 @@ module Basiq
     def refresh(connection_id)
       endpoint = "/#{@root_endpoint}/#{connection_id}/refresh"
 
-      response = Basiq::Request.new(endpoint).post(headers: headers)
-
-      @parser.parse(response.body)
+      perform_request!(:post, endpoint: endpoint)
     end
 
     # Use this to refresh of all connections.
@@ -128,9 +119,7 @@ module Basiq
     def refresh_all
       endpoint = "/#{@root_endpoint}/refresh"
 
-      response = Basiq::Request.new(endpoint).post(headers: headers)
-
-      @parser.parse(response.body)
+      perform_request!(:post, endpoint: endpoint)
     end
 
     private

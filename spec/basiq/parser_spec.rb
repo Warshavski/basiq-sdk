@@ -95,13 +95,12 @@ RSpec.describe Basiq::Parser do
       end
       let(:model) { Basiq::Entities::Institution }
 
-      it { expect(subject).to be_an(Array) }
-
-      it { expect(subject.first).to be_an(model) }
+      it { expect(subject).to be_an(Hash) }
 
       it 'returns model with parsed data' do
-        entity = subject.first
+        entity = subject[:entities].first
 
+        expect(entity).to be_an(model)
         expect(entity.type).to eq('institution')
         expect(entity.id).to eq('AU00000')
         expect(entity.name).to eq('Basiq Test Bank')
@@ -112,6 +111,9 @@ RSpec.describe Basiq::Parser do
         expect(entity.login_id_caption).to eq('Login')
         expect(entity.password_caption).to eq('Password')
         expect(entity.tier).to eq('4')
+
+        links = subject[:links]
+        expect(links[:self]).to eq('https://au-api.basiq.io/institutions')
       end
     end
   end
