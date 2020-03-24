@@ -15,6 +15,7 @@ require 'basiq/entities/user'
 
 require 'basiq/authorizer'
 require 'basiq/client'
+require 'basiq/cursor'
 require 'basiq/connection_query'
 require 'basiq/filter_builder'
 require 'basiq/parser'

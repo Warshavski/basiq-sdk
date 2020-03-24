@@ -108,7 +108,7 @@ module Basiq
     end
 
     def parsable_error?(error)
-      error.is_a?(Faraday::Error::ClientError) && error.response
+      error.is_a?(Faraday::ClientError) && error.response
     end
 
     def parse_error(error)

@@ -61,25 +61,26 @@ module Basiq
     def find_by_id(resource_id)
       endpoint = "/#{@root_endpoint}/#{resource_id}"
 
-      response = Basiq::Request.new(endpoint).get(headers: headers)
-
-      @parser.parse(response.body)
+      perform_request!(:get, endpoint: endpoint)
     end
 
-    # Use this collection to retrieve a list of institutions.
-    # Each entry in the array is a separate institution object.
+    # Retrieves and iterates through a collection of the basiq entities.
     #
-    # @return [Array<Basiq::Entities::base]
+    # Each entry in the array is a separate basiq entity object.
+    #
+    # @return [Basiq::Cursor]
     #
     def retrieve
-      filters = @filter_builder.build
-
       endpoint = @root_endpoint
-      endpoint = "#{@root_endpoint}?#{filters}" if filters.present?
 
-      response = Basiq::Request.new(endpoint).get(headers: headers)
+      filters = @filter_builder.build
+      if !filters.nil? && !filters.empty?
+        endpoint = "#{@root_endpoint}?#{filters}"
+      end
 
-      @parser.parse(response.body)
+      Basiq::Cursor.new(endpoint) do |url|
+        perform_request!(:get, endpoint: url)
+      end
     end
 
     # Use this to create a new resource object.
@@ -94,11 +95,7 @@ module Basiq
     # @return [Basiq::Entities::Base]
     #
     def create(params)
-      response = Basiq::Request
-                 .new(@root_endpoint)
-                 .post(body: params, headers: headers)
-
-      @parser.parse(response.body)
+      perform_request!(:post, endpoint: @root_endpoint, body: params)
     end
 
     # Updates the specified resource object by setting the values of the parameters passed.
@@ -117,11 +114,7 @@ module Basiq
     def update(resource_id, params)
       endpoint = "/#{@root_endpoint}/#{resource_id}"
 
-      response = Basiq::Request
-                 .new(endpoint)
-                 .post(body: params, headers: headers)
-
-      @parser.parse(response.body)
+      perform_request!(:post, endpoint: endpoint, body: params)
     end
 
     # Permanently deletes a user along with all of their associated connection details.
@@ -141,7 +134,21 @@ module Basiq
     def delete(resource_id)
       endpoint = "/#{@root_endpoint}/#{resource_id}"
 
-      Basiq::Request.new(endpoint).delete(headers: headers)
+      perform_request!(:delete, endpoint: endpoint)
+    end
+
+    private
+
+    def perform_request!(method, endpoint:, params: nil, body: nil)
+      request = Basiq::Request.new(endpoint)
+
+      opts = { headers: headers, params: params }
+
+      opts[:body] = body unless body.nil?
+
+      response = request.public_send(method, opts)
+
+      @parser.parse(response.body)
     end
   end
 end

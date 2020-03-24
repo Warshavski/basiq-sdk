@@ -22,26 +22,32 @@ module Basiq
     #
     # @param [Hash] data - Raw data from the API request
     #
-    # @return [Array<Basiq::Entities::Base>, Basiq::Entities::Base]
+    # @return [Hash, Array<Basiq::Entities::Base>, Basiq::Entities::Base]
     #
     def parse(data)
       transformed_data = transform_keys(data)
 
-      convert(transformed_data)
+      convert(transformed_data, top_level: true)
     end
 
     private
 
-    def convert(data)
+    def convert(data, top_level: false)
       if data[:type] == 'list'
-        convert_to_list(data)
+        convert_to_list(data, top_level)
       else
         convert_to_entity(data)
       end
     end
 
-    def convert_to_list(data)
-      data[:data].compact.map { |obj| convert_to_entity(obj) }
+    def convert_to_list(raw_data, top_level)
+      entities = raw_data[:data].compact.map { |obj| convert_to_entity(obj) }
+
+      if top_level
+        { links: raw_data[:links], entities: entities }
+      else
+        entities
+      end
     end
 
     def convert_to_entity(data)

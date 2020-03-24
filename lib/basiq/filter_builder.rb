@@ -33,7 +33,7 @@ module Basiq
     # @return [Self]
     #
     def eq(field, value)
-      self.tap { filters << "#{field}.eq('#{value}')" }
+      tap { filters << "#{field}.eq('#{value}')" }
     end
 
     # "Greater than" filter
@@ -46,7 +46,7 @@ module Basiq
     # @return [Self]
     #
     def gt(field, value)
-      self.tap { filters << "#{field}.gt('#{value}')" }
+      tap { filters << "#{field}.gt('#{value}')" }
     end
 
     # "Greater than or equal to" filter
@@ -59,7 +59,7 @@ module Basiq
     # @return [Self]
     #
     def gteq(field, value)
-      self.tap { filters << "#{field}.gteq('#{value}')" }
+      tap { filters << "#{field}.gteq('#{value}')" }
     end
 
     # "Less than" filter
@@ -72,7 +72,7 @@ module Basiq
     # @return [Self]
     #
     def lt(field, value)
-      self.tap { filters << "#{field}.lt('#{value}')" }
+      tap { filters << "#{field}.lt('#{value}')" }
     end
 
     # "Less than or equal to" filter
@@ -85,7 +85,7 @@ module Basiq
     # @return [Self]
     #
     def lteq(field, value)
-      self.tap { filters << "#{field}.lteq('#{value}')" }
+      tap { filters << "#{field}.lteq('#{value}')" }
     end
 
     # "Between two values" filter - used for date range filtering.
@@ -101,7 +101,7 @@ module Basiq
     # @return [Self]
     #
     def bt(field, first_value, second_value)
-      self.tap { filters << "#{field}.bt('#{first_value}', '#{second_value}')" }
+      tap { filters << "#{field}.bt('#{first_value}', '#{second_value}')" }
     end
 
     # Build filter expression and return query string
