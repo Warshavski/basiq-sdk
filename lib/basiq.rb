@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'basiq/version'
 
 require 'faraday'
@@ -23,7 +25,6 @@ require 'basiq/query'
 require 'basiq/request'
 require 'basiq/response'
 require 'basiq/service_error'
-
 
 module Basiq
   class Error < StandardError; end
