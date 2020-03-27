@@ -52,4 +52,18 @@ RSpec.describe Basiq::Entities::Base do
       it { expect(subject.dump).to eq(%w[so wat]) }
     end
   end
+
+  describe '#to_h' do
+    subject { FakeEntity.new(attributes).to_h }
+
+    let(:attributes) do
+      {
+        name: 'name',
+        status: :scheduled,
+        dump: { logo: { url: 'url' }, description: 'description' }
+      }
+    end
+
+    it { is_expected.to eq(attributes) }
+  end
 end
