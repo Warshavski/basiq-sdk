@@ -60,14 +60,6 @@ module Basiq
       def initialize(params)
         super(params)
       end
-
-      def to_h
-        {
-          id: id,
-          status: status,
-          last_used: last_used
-        }
-      end
     end
   end
 end

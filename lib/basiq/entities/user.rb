@@ -30,15 +30,6 @@ module Basiq
       def initialize(params)
         super(params)
       end
-
-      def to_h
-        {
-          id: id,
-          email: email,
-          mobile: mobile,
-          name: name
-        }
-      end
     end
   end
 end

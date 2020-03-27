@@ -20,6 +20,12 @@ module Basiq
         yield self if block_given?
       end
 
+      def to_h
+        instance_variables.each_with_object({}) do |var, output|
+          output[var.to_s.delete('@').to_sym] = instance_variable_get(var)
+        end
+      end
+
       private
 
       def assign_attributes(new_attributes)
@@ -34,7 +40,7 @@ module Basiq
       end
 
       def stringify_keys(hash)
-        transform_keys(hash) { |key| key.to_s }
+        transform_keys(hash, &:to_s)
       end
 
       def transform_keys(hash)

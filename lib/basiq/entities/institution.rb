@@ -69,22 +69,6 @@ module Basiq
       def initialize(params)
         super(params)
       end
-
-      def to_h
-        {
-          id: id,
-          name: name,
-          short_name: short_name,
-          country: country,
-          service_name: service_name,
-          service_type: service_type,
-          institution_type: institution_type,
-          tier: tier,
-          login_id_caption: login_id_caption,
-          password_caption: password_caption,
-          logo: logo
-        }
-      end
     end
   end
 end
